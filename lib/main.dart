@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:webf/webf.dart';
 
@@ -44,11 +42,17 @@ class MyApp extends StatefulWidget {
 class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Webf Test")),
-      body: WebF.fromControllerName(
-        controllerName: 'home',
-        loadingWidget: CircularProgressIndicator(),
+    return MaterialApp(
+      title: "Webf Test",
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(),
+      darkTheme: ThemeData.dark(),
+      home: Scaffold(
+        appBar: AppBar(title: Text("Webf Test")),
+        body: WebF.fromControllerName(
+          controllerName: 'home',
+          loadingWidget: CircularProgressIndicator(),
+        ),
       ),
     );
   }
