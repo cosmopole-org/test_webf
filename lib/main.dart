@@ -22,6 +22,23 @@ void main() async {
     ),
   );
 
+  await WebFControllerManager.instance.addWithPrerendering(
+    name: 'home',
+    createController: () => WebFController(),
+    bundle: WebFBundle.fromContent("""
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        </head>
+        <body>
+          <h1>test</h1>
+        </body>
+      </html>
+      """, url: 'https://localhost/home'),
+  );
+
   runApp(MyApp());
 }
 
@@ -33,7 +50,6 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -45,7 +61,7 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(title: Text("Webf Test")),
         body: WebF.fromControllerName(
           controllerName: 'home',
-          createController: () =>  WebFController(
+          createController: () => WebFController(
             bundle: WebFBundle.fromContent("""
       <!DOCTYPE html>
       <html>
