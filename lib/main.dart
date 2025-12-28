@@ -544,7 +544,7 @@ WebFBundle? _getBundleForControllerName(String controllerName) {
     <h1>Hello Keyhan</h1>
   </body>
 </html>
-      """);
+      """, url: 'http://localhost/home',);
     default:
       // Return null if the controller name is not recognized
       return null;
