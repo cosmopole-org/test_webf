@@ -25,7 +25,7 @@ void main() async {
     name: 'home',
     createController: () => WebFController(),
     bundle: WebFBundle.fromContent(
-      "<html><head></head><body><h1>test</h1></body></html>",
+      "<!DOCTYPE html><head></head><body><h1>test</h1></body></html>",
     ),
   );
 
