@@ -10,6 +10,7 @@ void main() async {
 
   WebFControllerManager.instance.initialize(
     WebFControllerManagerConfig(
+      enableDevTools: true,
       maxAliveInstances: 5,
       maxAttachedInstances: 3,
       onControllerDisposed: (String name, WebFController controller) {
