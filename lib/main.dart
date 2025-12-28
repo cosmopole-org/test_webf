@@ -32,30 +32,6 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    WebFControllerManager.instance
-        .addWithPrerendering(
-          name: 'home',
-          createController: () => WebFController(),
-          bundle: WebFBundle.fromContent("""
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        </head>
-        <body>
-          <h1>test</h1>
-        </body>
-      </html>
-      """, url: 'https://localhost/home'),
-        )
-        .then((_) {
-          setState(() {});
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,9 +44,34 @@ class MyAppState extends State<MyApp> {
         appBar: AppBar(title: Text("Webf Test")),
         body: WebF.fromControllerName(
           controllerName: 'home',
+          createController: () =>  WebFController(
+            bundle: WebFBundle.fromContent("""
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        </head>
+        <body>
+          <h1>test</h1>
+        </body>
+      </html>
+      """, url: 'https://localhost/home'),
+          ),
           loadingWidget: CircularProgressIndicator(),
           onControllerCreated: (controller) {
-            print('Controller found and linked!');
+            Widget okButton = TextButton(child: Text("OK"), onPressed: () {});
+            AlertDialog alert = AlertDialog(
+              title: Text("My title"),
+              content: Text("controller loaded !"),
+              actions: [okButton],
+            );
+            showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return alert;
+              },
+            );
           },
         ),
       ),
