@@ -1,4 +1,4 @@
-package com.example.test_webf
+package com.example.webf
 
 import io.flutter.embedding.android.FlutterActivity
 

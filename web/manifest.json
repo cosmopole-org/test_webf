@@ -1,6 +1,6 @@
 {
-    "name": "test_webf",
-    "short_name": "test_webf",
+    "name": "webf",
+    "short_name": "webf",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
