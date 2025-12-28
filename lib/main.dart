@@ -35,32 +35,11 @@ void main() async {
   WebFControllerManager.instance.addWithPreload(
     name: 'home',
     createController: () => WebFController(
-      routeObserver: routeObserver,
-      initialRoute: '/',
-      onLCP: (time, isEvaluated) {
-        print('LCP time: $time, evaluated: $isEvaluated');
-      },
-      onLCPContentVerification: (contentInfo, routePath) {
-        print('contentInfo: $contentInfo');
-      },
-      httpLoggerOptions: HttpLoggerOptions(
-        requestHeader: true,
-        requestBody: true,
-      ),
-      onControllerInit: (controller) async {
-        controller.loadingState.onFinalLargestContentfulPaint((event) {
-          final dump = controller.dumpLoadingState(
-            options:
-                LoadingStateDumpOptions.html |
-                LoadingStateDumpOptions.api |
-                LoadingStateDumpOptions.scripts |
-                LoadingStateDumpOptions.networkDetailed,
-          );
-          debugPrint(dump.toStringFiltered());
-        });
-      },
+      bundle: WebFBundle.fromUrl('https://miracleplus.openwebf.com/'),
     ),
-    bundle: WebFBundle.fromUrl('https://miracleplus.openwebf.com/'),
+    bundle: WebFBundle.fromContent(
+      "<html><head></head><body><div>test</div></body></html>",
+    ),
   );
 
   runApp(MyApp());
@@ -87,14 +66,20 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     if (controller != null) {
-      return WebFHTMLElement(
-        tagName: "h1",
-        controller: controller!,
-        parentElement: null,
-        children: [Text("hello world !")],
+      return Scaffold(
+        appBar: AppBar(title: Text("Webf Test")),
+        body: WebFHTMLElement(
+          tagName: "h1",
+          controller: controller!,
+          parentElement: null,
+          children: [Text("hello world !")],
+        ),
       );
     } else {
-      return Container();
+      return Container(
+        padding: EdgeInsets.all(16),
+        child: Text("controller not found"),
+      );
     }
   }
 }
