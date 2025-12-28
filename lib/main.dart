@@ -24,18 +24,18 @@ void main() async {
   WebFControllerManager.instance.addWithPrerendering(
     name: 'home',
     createController: () => WebFController(),
-    bundle: WebFBundle.fromContent(
-      """
+    bundle: WebFBundle.fromContent("""
       <!DOCTYPE html>
       <html>
         <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width,initial-scale=1.0">
         </head>
         <body>
           <h1>test</h1>
         </body>
       </html>
-      """,
-    ),
+      """, url: 'https://localhost/home'),
   );
 
   runApp(MyApp());
@@ -61,6 +61,9 @@ class MyAppState extends State<MyApp> {
         body: WebF.fromControllerName(
           controllerName: 'home',
           loadingWidget: CircularProgressIndicator(),
+          onControllerCreated: (controller) {
+            print('Controller found and linked!');
+          },
         ),
       ),
     );
