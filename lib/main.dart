@@ -21,7 +21,7 @@ void main() async {
     ),
   );
 
-  WebFControllerManager.instance.addWithPreload(
+  WebFControllerManager.instance.addWithPrerendering(
     name: 'home',
     createController: () => WebFController(),
     bundle: WebFBundle.fromContent(
